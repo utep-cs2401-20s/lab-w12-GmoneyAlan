@@ -38,7 +38,7 @@ class myBinarySearchTreeNode{
      int leftH = 0, rightH = 0;
      // This method recursively calculates the height of the entire (sub)tree.
      // This method will take O(n) time
-    
+
      if(rightH > leftH)
        return rightH;
      return leftH;
@@ -78,21 +78,4 @@ class myBinarySearchTreeNode{
     if(right != null) right.print(prefix + "\u2514 ");
   }
   
-}
-
-class Main{
-  public static void main(String[] args) {
-    myBinarySearchTreeNode alan;
-    int[] a = {5,2,7,4,3,8,9};
-    alan = new myBinarySearchTreeNode(a);
-
-
-    int size = alan.size();
-    System.out.println(size);
-    System.out.println(" " + alan.myValue);
-    System.out.println(alan.left.myValue + " " + alan.right.myValue);
-
-    int coon = alan.depth(9);
-    System.out.println(coon);
-  }
 }
