@@ -4,42 +4,70 @@ class myBinarySearchTreeNode{
   myBinarySearchTreeNode right;
     
   myBinarySearchTreeNode(int inValue){
-    // created a new node with empty child pointers
-
+    this.myValue = inValue;
+    this.right = null;
+    this.left = null;
   }
   
   myBinarySearchTreeNode(int[] A){
-    // creates a new Binary Search Tree rooted at the first value in the array
-    /// by inserting elements into the tree in the order they are given in A.
-
+    myValue = A[0];
+    for(int i = 1; i < A.length;i++){
+      insert(A[i]);
+    }
   }
   
   public void insert(int inValue){
-    // This method takes a new integer as input and decides 
-    // if it should be place: 
-    //    * as the left child,
-    //    * as the right child, 
-    //    * in the left subtree,
-    //    * or in the right subtree.
-    // If the value already exists in the tree, no action is taken. 
-    
+    if(inValue >= myValue){
+      if(right == null){
+        right = new myBinarySearchTreeNode(inValue);
+      } else if(inValue == myValue){
+        System.out.println("Value already exists in the Tree.");
+      } else {
+        right.insert(inValue);
+      }
+    } else {
+      if(left == null){
+        left = new myBinarySearchTreeNode(inValue);
+      }  else {
+          left.insert(inValue);
+      }
+    }
   }
   
   public int height(){
+     int leftH = 0, rightH = 0;
      // This method recursively calculates the height of the entire (sub)tree.
      // This method will take O(n) time
-     return -1;
+    
+     if(rightH > leftH)
+       return rightH;
+     return leftH;
   }
   
   public int depth(int search){
-     // This method recursively calculates the depth of a given search value. 
-     // If the given value is not in the tree, this method returns -1. 
-     // Note that if the tree is a proper BST, this method should complete in O(log n) time.
-     // Additionally, remember that the depth is the number of nodes on the path from a node to the root 
-     // (i.e. the number of the recursie calls).
+    int sum = 0;
+    if(search == myValue)
+      return sum;
+    else if(search > myValue)
+      sum = sum + 1 + right.depth(search);
+    else if(search < myValue)
+      sum = sum + 1 + left.depth(search);
+    if(sum > -1)
+      return sum;
     return -1;
   }
-  
+
+  public int size(){
+    int sumL = 0;
+    int sumR = 0;
+    if (this.left != null)
+      sumL = left.size();
+    if (this.right != null)
+      sumR = right.size();
+
+    return 1 + sumL + sumR;
+  }
+
   // Utility function included so you can debug your solution. 
   public void print() { print(""); }
   private void print(String prefix) {
@@ -50,4 +78,21 @@ class myBinarySearchTreeNode{
     if(right != null) right.print(prefix + "\u2514 ");
   }
   
-} 
+}
+
+class Main{
+  public static void main(String[] args) {
+    myBinarySearchTreeNode alan;
+    int[] a = {5,2,7,4,3,8,9};
+    alan = new myBinarySearchTreeNode(a);
+
+
+    int size = alan.size();
+    System.out.println(size);
+    System.out.println(" " + alan.myValue);
+    System.out.println(alan.left.myValue + " " + alan.right.myValue);
+
+    int coon = alan.depth(9);
+    System.out.println(coon);
+  }
+}
