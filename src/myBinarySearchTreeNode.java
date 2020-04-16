@@ -38,6 +38,10 @@ class myBinarySearchTreeNode{
      int leftH = 0, rightH = 0;
      // This method recursively calculates the height of the entire (sub)tree.
      // This method will take O(n) time
+    if(left != null)
+      leftH = 1 + left.height();
+    if(right != null)
+        rightH = 1 + right.height();
 
      if(rightH > leftH)
        return rightH;
@@ -79,3 +83,5 @@ class myBinarySearchTreeNode{
   }
   
 }
+
+
