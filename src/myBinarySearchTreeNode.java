@@ -2,20 +2,21 @@ class myBinarySearchTreeNode{
   int myValue;
   myBinarySearchTreeNode left;
   myBinarySearchTreeNode right;
-    
+  //Constructor to build one single node
   myBinarySearchTreeNode(int inValue){
     this.myValue = inValue;
     this.right = null;
     this.left = null;
   }
-  
+  //Constructos where an array is used to build a tree
   myBinarySearchTreeNode(int[] A){
     myValue = A[0];
     for(int i = 1; i < A.length;i++){
       insert(A[i]);
     }
   }
-  
+  //Method to add nodes after a tree is established
+  //Will not add duplicates
   public void insert(int inValue){
     if(inValue >= myValue){
       if(right == null){
@@ -33,7 +34,7 @@ class myBinarySearchTreeNode{
       }
     }
   }
-  
+  //Count the height of the tree where the root is zero
   public int height(){
      int leftH = 0, rightH = 0;
      // This method recursively calculates the height of the entire (sub)tree.
@@ -47,20 +48,18 @@ class myBinarySearchTreeNode{
        return rightH;
      return leftH;
   }
-  
+  //Finds the distance between the search node and the root
   public int depth(int search){
-    int sum = 0;
+    if(search > myValue && right != null)
+      return 1 + right.depth(search);
+    if(search < myValue && left != null)
+      return  1 + left.depth(search);
     if(search == myValue)
-      return sum;
-    else if(search > myValue)
-      sum = sum + 1 + right.depth(search);
-    else if(search < myValue)
-      sum = sum + 1 + left.depth(search);
-    if(sum > -1)
-      return sum;
+      return 0;
+
     return -1;
   }
-
+  //Counts each node in the tree to output size of tree
   public int size(){
     int sumL = 0;
     int sumR = 0;
